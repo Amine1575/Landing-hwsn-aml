@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRESHCLEAN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+        }
+        
+        nav {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 1rem 0;
+        }
+        
+        nav ul li {
+            margin: 0 1.5rem;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            color: #7f8c8d;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+            position: relative;
+            height: 400px;
+            perspective: 1000px;
+        }
+        
+        .service-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .service-card:hover .service-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .service-card-front, .service-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .service-card-back {
+            transform: rotateY(180deg);
+            padding: 2rem;
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            overflow-y: auto;
+        }
+        
+        .service-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .service-card:hover .service-img img {
+            transform: scale(1.1);
+        }
+        
+        .service-content {
+            padding: 1.5rem;
+        }
+        
+        .service-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        .service-content p {
+            color: #7f8c8d;
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-details {
+            margin-top: 1rem;
+        }
+        
+        .service-details h4 {
+            margin: 1rem 0 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 0.5rem;
+        }
+        
+        .service-details ul {
+            margin-left: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .service-details li {
+            margin-bottom: 0.3rem;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 4rem 0;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 250px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        .contact {
+            background: #fff;
+            padding: 4rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 4rem;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-item {
+            text-align: center;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .contact-item:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .contact-item:hover i,
+        .contact-item:hover h3,
+        .contact-item:hover p {
+            color: white;
+        }
+        
+        .contact-item i {
+            font-size: 2.5rem;
+            color: #3498db;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .contact-item h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s;
+        }
+        
+        .contact-item p {
+            color: #7f8c8d;
+            transition: all 0.3s;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: #3498db;
+            color: white;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-5px);
+            background: #2c3e50;
+        }
+        
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        /* Animation for service cards */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .service-card {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        .service-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .service-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        .service-card:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+        
+        .service-card:nth-child(5) {
+            animation-delay: 0.8s;
+        }
+        
+        .service-card:nth-child(6) {
+            animation-delay: 1s;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .service-card {
+                height: auto;
+                min-height: 400px;
+            }
+            
+            .service-card-inner {
+                transform: none;
+                height: auto;
+            }
+            
+            .service-card:hover .service-card-inner {
+                transform: none;
+            }
+            
+            .service-card-front, .service-card-back {
+                position: relative;
+                height: auto;
+            }
+            
+            .service-card-back {
+                transform: none;
+                display: none;
+            }
+            
+            .service-card:hover .service-card-back {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+                            <i class="fas fa-spray-can logo-icon"></i>
+
+            FRESHCLEAN
+        </div>
+        <p>Fresh Clean est une société spécialisée dans le nettoyage professionnel des tapis, tissus, fauteuils, vitres et bien plus encore.
+Nous combinons efficacité, rapidité et respect de l’environnement 🌍.</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#services">Nos Services</a></li>
+            <li><a href="#galerie">Galerie</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <section id="accueil" class="hero">
+            <h1>Des solutions de nettoyage professionnelles</h1>
+            <p>Nous offrons des services de nettoyage de haute qualité pour vos sols, jardins, piscines, cuivres, moquettes et fauteuils.</p>
+            <a href="#contact" class="btn">Contactez-nous</a>
+        </section>
+        
+        <section id="services">
+            <div class="section-title">
+                <h2>Nos Services</h2>
+                <p>Pointez sur chaque service pour découvrir nos prestations détaillées</p>
+            </div>
+            
+            <div class="services">
+                <div class="service-card">
+                    <div class="service-card-inner">
+                        <div class="service-card-front">
+                            <div class="service-img">
+                                <img src="C:\Users\amine\Desktop\essqai\img\sol.jpg" alt="Nettoyage et ponçage des sols">
+                            </div>
+                            <div class="service-content">
+                                <h3>Nettoyage et Ponçage des Sols</h3>
+                                <p>Nous redonnons vie à vos sols avec un ponçage et nettoyage professionnel.</p>
+                                <p class="btn">En savoir plus </p>
+                            </div>
+                        </div>
+                        <div class="service-card-back">
+                            <h3>Nettoyage et Ponçage des Sols</h3>
+                            <div class="service-details">
+                                <p>Notre service complet de nettoyage et ponçage de sols comprend :</p>
+                                <h4>Pour les parquets :</h4>
+                                <ul>
+                                    <li>Ponçage avec des machines professionnelles</li>
+                                    <li>Rebouchage des fissures et interstices</li>
+                                    <li>Application de vitrificateur ou d'huile</li>
+                                    <li>Finitions impeccables et durables</li>
+                                </ul>
+                                <h4>Pour les carrelages :</h4>
+                                <ul>
+                                    <li>Nettoyage haute pression</li>
+                                    <li>Déjointoiement et rejointoiement</li>
+                                    <li>Application de produits hydrofuges</li>
+                                    <li>Polissage pour un rendu brillant</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-card-inner">
+                        <div class="service-card-front">
+                            <div class="service-img">
+                                <img src="C:\Users\amine\Desktop\essqai\img\jar.jpeg" alt="Nettoyage des jardins">
+                            </div>
+                            <div class="service-content">
+                                <h3>Nettoyage des Jardins</h3>
+                                <p>Entretien complet de vos espaces verts pour un jardin toujours impeccable.</p>
+                                <p class="btn">En savoir plus </p>
+                            </div>
+                        </div>
+                        <div class="service-card-back">
+                            <h3>Nettoyage des Jardins</h3>
+                            <div class="service-details">
+                                <p>Notre service d'entretien de jardins comprend :</p>
+                                <h4>Entretien régulier :</h4>
+                                <ul>
+                                    <li>Tonte de la pelouse et ajustement des bordures</li>
+                                    <li>Taillez des haies, arbustes et arbres</li>
+                                    <li>Désherbage manuel et mécanique</li>
+                                    <li>Plantation de fleurs saisonnières</li>
+                                </ul>
+                                <h4>Nettoyage en profondeur :</h4>
+                                <ul>
+                                    <li>Ramassage des feuilles et débris végétaux</li>
+                                    <li>Nettoyage des allées et terrasses</li>
+                                    <li>Entretien des systèmes d'arrosage</li>
+                                    <li>Préparation des sols pour nouvelles plantations</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-card-inner">
+                        <div class="service-card-front">
+                            <div class="service-img">
+                                <img src="C:\Users\amine\Desktop\essqai\img\piscine.jpg" alt="Nettoyage de piscines">
+                            </div>
+                            <div class="service-content">
+                                <h3>Nettoyage de Piscines</h3>
+                                <p>Service complet de nettoyage et d'entretien de piscines pour une eau cristalline.</p>
+                                <p class="btn">En savoir plus </p>
+                            </div>
+                        </div>
+                        <div class="service-card-back">
+                            <h3>Nettoyage de Piscines</h3>
+                            <div class="service-details">
+                                <p>Notre service complet d'entretien de piscines comprend :</p>
+                                <h4>Nettoyage mécanique :</h4>
+                                <ul>
+                                    <li>Nettoyage des parois, ligne d'eau et fond</li>
+                                    <li>Vidange, nettoyage et rinçage des filtres</li>
+                                    <li>Nettoyage des skimmers et paniers</li>
+                                    <li>Vérification du système de filtration</li>
+                                </ul>
+                                <h4>Entretien chimique :</h4>
+                                <ul>
+                                    <li>Contrôle et ajustement du pH</li>
+                                    <li>Régulation du chlore/brome</li>
+                                    <li>Traitement anti-algues</li>
+                                    <li>Prévention du calcaire</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-card-inner">
+                        <div class="service-card-front">
+                            <div class="service-img">
+                                <img src="C:\Users\amine\Desktop\essqai\img\cuir.jpeg" alt="Nettoyage de cuivre">
+                            </div>
+                            <div class="service-content">
+                                <h3>Nettoyage de Cuir</h3>
+                                <p>Redonnez leur éclat à vos objets en cuivre avec notre service spécialisé.</p>
+                                <p class="btn">En savoir plus </p>
+                            </div>
+                        </div>
+                        <div class="service-card-back">
+                            <h3>Nettoyage de Cuivre</h3>
+                            <div class="service-details">
+                                <p>Notre service de nettoyage de cuivre comprend :</p>
+                                <h4>Pour les objets décoratifs :</h4>
+                                <ul>
+                                    <li>Nettoyage en profondeur sans abrasion</li>
+                                    <li>Polissage pour faire ressortir l'éclat naturel</li>
+                                    <li>Application de protection contre l'oxydation</li>
+                                    <li>Conseils pour l'entretien régulier</li>
+                                </ul>
+                                <h4>Pour les ustensiles et équipements :</h4>
+                                <ul>
+                                    <li>Déoxydation en douceur</li>
+                                    <li>Nettoyage des surfaces sans rayures</li>
+                                    <li>Traitement anti-taches</li>
+                                    <li>Restauration des pièces anciennes</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-card-inner">
+                        <div class="service-card-front">
+                            <div class="service-img">
+                                <img src="C:\Users\amine\Desktop\essqai\img\moq.jpg" alt="Nettoyage de moquettes">
+                            </div>
+                            <div class="service-content">
+                                <h3>Nettoyage de Moquettes</h3>
+                                <p>Nettoyage profond des moquettes pour éliminer taches, odeurs et allergènes.</p>
+                                <p class="btn">En savoir plus</p>
+                            </div>
+                        </div>
+                        <div class="service-card-back">
+                            <h3>Nettoyage de Moquettes</h3>
+                            <div class="service-details">
+                                <p>Notre service de nettoyage de moquettes comprend :</p>
+                                <h4>Nettoyage standard :</h4>
+                                <ul>
+                                    <li>Aspiration professionnelle en profondeur</li>
+                                    <li>Détachage manuel des taches persistantes</li>
+                                    <li>Shampouining avec produits adaptés</li>
+                                    <li>Séchage accéléré</li>
+                                </ul>
+                                <h4>Nettoyage spécialisé :</h4>
+                                <ul>
+                                    <li>Traitement anti-acariens et anti-allergènes</li>
+                                    <li>Désodorisation et neutralisation des odeurs</li>
+                                    <li>Protection contre les futures taches</li>
+                                    <li>Rénovation des moquettes anciennes</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-card-inner">
+                        <div class="service-card-front">
+                            <div class="service-img">
+                                <img src="C:\Users\amine\Desktop\essqai\img\faut.jpg" alt="Nettoyage de fauteuils">
+                            </div>
+                            <div class="service-content">
+                                <h3>Nettoyage de Fauteuils</h3>
+                                <p>Nettoyage professionnel de tous types de fauteuils et canapés.</p>
+                                <p class="btn">En savoir plus</p>
+                            </div>
+                        </div>
+                        <div class="service-card-back">
+                            <h3>Nettoyage de Fauteuils</h3>
+                            <div class="service-details">
+                                <p>Notre service de nettoyage de fauteuils comprend :</p>
+                                <h4>Pour les tissus :</h4>
+                                <ul>
+                                    <li>Dépoussiérage en profondeur</li>
+                                    <li>Nettoyage à la vapeur ou à sec selon le tissu</li>
+                                    <li>Détachage spécifique pour chaque type de tache</li>
+                                    <li>Protection contre les futures salissures</li>
+                                </ul>
+                                <h4>Pour le cuir :</h4>
+                                <ul>
+                                    <li>Nettoyage doux spécifique au cuir</li>
+                                    <li>Nourriture et hydratation du cuir</li>
+                                    <li>Réparation des petites fissures</li>
+                                    <li>Application de cire protectrice</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="galerie" class="gallery-section">
+            <div class="section-title">
+                <h2>Notre Galerie</h2>
+                <p>Quelques exemples de nos réalisations</p>
+            </div>
+            
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="C:\Users\amine\Desktop\essqai\img\moq.jpg" alt="Avant/Après nettoyage">
+                    <div class="gallery-caption">Nettoyage de moquette - Résultat impressionnant</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="C:\Users\amine\Desktop\essqai\img\moq.jpg" alt="Ponçage de parquet">
+                    <div class="gallery-caption">Ponçage et rénovation de parquet ancien</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="C:\Users\amine\Desktop\essqai\img\moq.jpg" alt="Nettoyage de piscine">
+                    <div class="gallery-caption">Nettoyage complet de piscine</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="C:\Users\amine\Desktop\essqai\img\moq.jpg" alt="Nettoyage jardin">
+                    <div class="gallery-caption">Entretien d'espace vert</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="C:\Users\amine\Desktop\essqai\img\moq.jpg" alt="Nettoyage cuivre">
+                    <div class="gallery-caption">Polissage de cuivre</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1582582494705-f8ce0b0c24f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nettoyage canapé">
+                    <div class="gallery-caption">Nettoyage de canapé en tissu</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nettoyage carrelage">
+                    <div class="gallery-caption">Nettoyage de carrelage</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1560448204-603b3fc33ddc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nettoyage extérieur">
+                    <div class="gallery-caption">Nettoyage de terrasse</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="C:\Users\amine\Desktop\essqai\img\moq.jpg" alt="Test de l'eau">
+                    <div class="gallery-caption">Analyse et traitement de l'eau de piscine</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Désherbage">
+                    <div class="gallery-caption">Désherbage écologique</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="C:\Users\amine\Desktop\essqai\img\moq.jpg" alt="Taillez de haie">
+                    <div class="gallery-caption">Taillez précise des haies</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="C:\Users\amine\Desktop\essqai\img\moq.jpg" alt="Entretien piscine">
+                    <div class="gallery-caption">Entretien complet de piscine</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact" class="contact">
+            <div class="section-title">
+                <h2>Contactez-Nous</h2>
+                <p>N'hésitez pas à nous contacter pour toute demande d'information ou de service</p>
+            </div>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <h3>Téléphone</h3>
+                    <p>+213 779 15 12 72</p>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>contact@cleafreshcleanpro.dz</p>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Adresse</h3>
+                    <p>beziouche fi paris, 26000 darna</p>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 FRESHCLEAN - Tous droits réservés</p>
+    </footer>
+</body>
+</html>
